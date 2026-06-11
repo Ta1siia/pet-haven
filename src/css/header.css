@@ -5,30 +5,35 @@
 }
 
 body {
-    font-family: Inter, Arial, sans-serif;
-    background: #f7f1ed;
-    color: #2f211d;
+    font-family: "IBM Plex Sans", sans-serif;
+    background-color: #f7f1ed;
+    color: #02060a;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 .header {
-    background: #fff;
+    background-color: #fff;
 }
 
 .header_container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
 
     max-width: 1440px;
     height: 72px;
     margin: 0 auto;
-    padding: 0 64px;
+    padding: 0 80px;
 }
 
 .logo {
     display: flex;
     align-items: center;
     text-decoration: none;
+
+    margin-right: 32px;
 }
 
 .logo_icon {
@@ -41,15 +46,30 @@ body {
     display: flex;
     align-items: center;
     gap: 32px;
+
     list-style: none;
 }
 
+.nav_item {
+    display: flex;
+}
+
 .nav a {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.5;
+    display: inline-block;
     color: #02060a;
     text-decoration: none;
+    border-bottom: 1px solid transparent;
+
+    transition: border-color 250ms ease;
+}
+
+.nav a:hover,
+.nav a:focus {
+    border-bottom-color: #443b2e;
+}
+
+.nav a:active {
+    border-bottom-color: #88765c;
 }
 
 .header_button {
@@ -57,40 +77,37 @@ body {
     align-items: center;
     justify-content: center;
 
-    min-width: 142px;
+    min-width: 97px;
     height: 48px;
-    padding: 0 24px;
+    padding: 12px 24px;
 
-    border-radius: 999px;
-    background-color: #f6b83d;
+    margin-left: auto;
 
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 1.2;
-    color: #2f211d;
+    border: 1px solid #88765c;
+    border-radius: 8px;
+
+    background-color: #88765c;
+    color: #fff;
+
     text-decoration: none;
+    cursor: pointer;
+
+    transition:
+        background-color 250ms ease,
+        border-color 250ms ease;
+}
+
+.header_button:hover,
+.header_button:focus {
+    background-color: #c3b49d;
+    border-color: #02060a;
+}
+
+.header_button:active {
+    background-color: #eee9e3;
+    border-color: #88765c;
 }
 
 .burger {
     display: none;
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-.burger span {
-    display: block;
-    width: 24px;
-    height: 2px;
-    margin: 5px auto;
-
-    border-radius: 2px;
-    background-color: #2f211d;
-}
-
-.header_button:hover {
-    background: #86745b;
 }
