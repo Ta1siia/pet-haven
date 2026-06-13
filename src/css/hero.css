@@ -5,7 +5,6 @@
   background-repeat: no-repeat;
   color: #ffffff;
   padding: 64px 20px 115px;
-  max-width: 375px;
   margin: 0 auto;
 }
 .hero-content {
@@ -35,11 +34,10 @@
   text-align: left;
 }
 
-.btn {
+.hero-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-sizing: border-box;
   cursor: pointer;
   border: 1px solid #88765c;
   background: #88765c;
@@ -52,15 +50,15 @@
   color: #ffffff;
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-.btn:hover,
-.btn:focus {
+.hero-btn:hover,
+.hero-btn:focus {
   background-color: #eee9e3;
   border-color: #88765c;
   outline: none;
   color: #02060a;
 }
 
-.btn:active {
+.hero-btn:active {
   background: #eee9e3;
   border-color: #6f5f49;
   box-shadow:
@@ -99,6 +97,7 @@
   .hero-container {
     background-image: url(../img/hero-bg-desktop.webp);
     max-width: 1440px;
+    padding: 128px 64px 413px;
   }
   .hero-title {
     font-size: 56px;
@@ -106,7 +105,7 @@
   .hero-subtitle {
     font-size: 18px;
   }
-  .btn {
+  .hero-btn {
     font-size: 16px;
   }
 }
