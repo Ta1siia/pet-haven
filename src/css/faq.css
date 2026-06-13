@@ -71,6 +71,14 @@ transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s eas
   margin-bottom: 10px;
 }
 
+.faq-answer ol {
+  list-style-type: decimal;
+}
+
+.faq-answer ul {
+  list-style-type: disc;
+}
+
 .faq-answer li:last-child {
   margin-bottom: 0;
 }
