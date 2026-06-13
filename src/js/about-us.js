@@ -5,7 +5,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-const swiper = new Swiper('.mySwiper', {
+const swiper = new Swiper('.about-swiper', {
   modules: [Navigation, Pagination],
 
   slidesPerView: 1,
