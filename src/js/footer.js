@@ -70,4 +70,6 @@ function updateActiveFooterLink() {
 window.addEventListener('scroll', updateActiveFooterLink);
 
 
-updateActiveFooterLink();
+updateActiveFooterLink();// Сюди пишемо імпорти
+import./ js / footer.js;
+
