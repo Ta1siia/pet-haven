@@ -1,5 +1,21 @@
+* {
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  color: #02060a;
+  background-color: #f6f4f1;
 }
 
 @font-face {
