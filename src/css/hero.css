@@ -5,7 +5,6 @@
   background-repeat: no-repeat;
   color: #ffffff;
   padding: 64px 20px 115px;
-  max-width: 375px;
   margin: 0 auto;
 }
 .hero-content {
@@ -17,38 +16,54 @@
 .hero-title {
   font-weight: 700;
   font-size: 40px;
-  line-height: 120%;
+  line-height: 1.2;
   letter-spacing: -0.01em;
-  color: var(--color-white);
+  color: #ffffff;
   margin-bottom: 24px;
-  font-family: 'Open Sans' var(--second-family) sans-serif;
+  font-family: 'Open Sans', sans-serif;
   text-align: left;
 }
+
 .hero-subtitle {
-  font-family: 'IBM Plex Sans', var(--font-family), sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 400;
   font-size: 16px;
-  line-height: 150%;
-  color: var(--color-white);
+  line-height: 1.5;
+  color: #ffffff;
   margin-bottom: 32px;
   text-align: left;
 }
 
-.btn {
+.hero-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-sizing: border-box;
   cursor: pointer;
-  border: 1px solid var(--Color-Mariner-Dark, #88765c);
-  background: var(--Color-Mariner-Dark, #88765c);
+  border: 1px solid #88765c;
+  background: #88765c;
   border-radius: 8px;
   padding: 12px 24px;
-  font-family: 'IBM Plex Sans', var(--font-family), sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 400;
   font-size: 14px;
-  line-height: 150%;
-  color: var(--color-white);
+  line-height: 1.5;
+  color: #ffffff;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hero-btn:hover,
+.hero-btn:focus {
+  background-color: #eee9e3;
+  border-color: #88765c;
+  outline: none;
+  color: #02060a;
+}
+
+.hero-btn:active {
+  background: #eee9e3;
+  border-color: #6f5f49;
+  box-shadow:
+    inset 0 4px 6px -2px rgba(0, 0, 0, 0.03),
+    inset 0 12px 16px -4px rgba(0, 0, 0, 0.08);
 }
 
 @media screen and (min-resolution: 192dpi) {
@@ -76,13 +91,13 @@
 @media screen and (min-width: 768px) and (min-resolution: 192dpi) {
   .hero-container {
     background-image: url(../img/hero-bg-tablet@2x.webp);
-    padding: 128px 64px 413px;
   }
 }
-@media screen and (min-width: 1336px) {
+@media screen and (min-width: 1440px) {
   .hero-container {
     background-image: url(../img/hero-bg-desktop.webp);
     max-width: 1440px;
+    padding: 128px 64px 413px;
   }
   .hero-title {
     font-size: 56px;
@@ -90,7 +105,7 @@
   .hero-subtitle {
     font-size: 18px;
   }
-  .button {
+  .hero-btn {
     font-size: 16px;
   }
 }
