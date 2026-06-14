@@ -34,6 +34,30 @@
 .swiper-pagination {
   display: flex;
   margin-left: 20px;
+  
+  align-items: center;
+  gap: 8px;
+
+  /* width: auto !important;
+  height: auto !important;*/
+} 
+
+.swiper-pagination-bullet {
+  width: 8px !important;
+  height: 8px !important;
+
+  margin: 0 !important;
+
+  background-color: #02060a !important;
+
+  opacity: 0.2;
+}
+
+.swiper-pagination-bullet-active {
+  width: 12px !important;
+  height: 12px !important;
+
+  opacity: 1;
 }
 
 .about-btn.swiper-button-disabled {
@@ -75,6 +99,7 @@
 .slide-card {
   position: relative;
 }
+
 
 .about-us-title {
   font-weight: 700;

@@ -20,3 +20,5 @@ const swiper = new Swiper('.about-swiper', {
     clickable: true,
   },
 });
+
+console.log(swiper);
