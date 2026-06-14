@@ -1,197 +1,129 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: "IBM Plex Sans", sans-serif;
-    background-color: #f7f1ed;
-    color: #02060a;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
 .header {
     background-color: #fff;
 }
 
-.header_container {
+.header-container {
     display: flex;
     align-items: center;
-
     max-width: 1440px;
     height: 72px;
     margin: 0 auto;
-    padding: 0 80px;
+    padding: 0 20px;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    text-decoration: none;
-
-    margin-right: 32px;
 }
 
-.logo_icon {
+.logo-icon {
     display: block;
     width: 112px;
     height: 48px;
 }
 
-.nav_list {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-
-    list-style: none;
-}
-
-.nav_item {
-    display: flex;
-}
-
-.nav a {
-    display: inline-block;
-    color: #02060a;
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-
-    transition: border-color 250ms ease;
-}
-
-.nav a:hover,
-.nav a:focus {
-    border-bottom-color: #443b2e;
-}
-
-.nav a:active {
-    border-bottom-color: #88765c;
-}
-
-.header_button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    min-width: 97px;
-    height: 48px;
-    padding: 12px 24px;
-
-    margin-left: auto;
-
-    border: 1px solid #88765c;
-    border-radius: 8px;
-
-    background-color: #88765c;
-    color: #fff;
-
-    text-decoration: none;
-    cursor: pointer;
-
-    transition:
-        background-color 250ms ease,
-        border-color 250ms ease;
-}
-
-.header_button:hover,
-.header_button:focus {
-    background-color: #c3b49d;
-    border-color: #02060a;
-}
-
-.header_button:active {
-    background-color: #eee9e3;
-    border-color: #88765c;
-}
-
-.burger {
+.nav,
+.header-button {
     display: none;
 }
 
-@media screen and (max-width: 1439px) {
-
-    .nav,
-    .header_button {
-        display: none;
-    }
-
-    .burger {
-        display: block;
-        align-items: center;
-        justify-content: center;
-    }
-}
-
-.mobile_menu {
-    position: fixed;
-    inset: 0;
-
-    width: 100%;
-    height: 100vh;
-
-    background-color: #f6f4f1;
-    z-index: 999;
-}
-
-.mobile_menu_header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 28px 20px;
-}
-
-.mobile_menu_close {
+.burger {
     display: flex;
     align-items: center;
     justify-content: center;
-
-    width: 32px;
-    height: 32px;
-
+    margin-left: auto;
     padding: 0;
     border: none;
     background-color: transparent;
-    cursor: pointer;
 }
 
-.mobile_menu_close_icon {
+.burger-icon {
+    display: block;
     width: 32px;
     height: 32px;
     fill: #02060a;
 }
 
-.mobile_nav {
-    margin-top: 40px;
+.mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background-color: rgba(2, 6, 10, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 }
 
-.mobile_nav_list {
+.mobile-menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.mobile-menu-content {
+    width: 100%;
+    height: 100%;
+    background-color: #f6f4f1;
+}
+
+.mobile-menu-header {
     display: flex;
-    flex-direction: column;
-    gap: 32px;
-    list-style: none;
-    padding: 0 20px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 20px;
 }
 
-.mobile_nav_item a {
-    font-family: "IBM Plex Sans", sans-serif;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1.5;
-    color: #02060a;
-    text-decoration: none;
-}
-
-.mobile_menu_button {
+.mobile-menu-close {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: "IBM Plex Sans", sans-serif;
-    font-weight: 400;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+}
+
+.mobile-menu-close-icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    fill: #02060a;
+}
+
+.mobile-nav {
+    margin-top: 40px;
+}
+
+.mobile-nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 0 20px;
+}
+
+.mobile-nav-item a {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #02060a;
+    border-bottom: 1px solid transparent;
+    transition: border-color 250ms ease;
+}
+
+.mobile-nav-item a:hover,
+.mobile-nav-item a:focus {
+    border-bottom-color: #443b2e;
+}
+
+.mobile-nav-item a:active {
+    border-bottom-color: #88765c;
+}
+
+.mobile-menu-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: calc(100% - 40px);
     max-width: 335px;
     min-height: 37px;
@@ -203,6 +135,87 @@ html {
     color: #fff;
     font-size: 14px;
     line-height: 1.5;
-    text-decoration: none;
-    cursor: pointer;
+    transition: background-color 250ms ease, border-color 250ms ease;
+}
+
+.mobile-menu-button:hover,
+.mobile-menu-button:focus {
+    background-color: #c3b49d;
+    border-color: #02060a;
+}
+
+.mobile-menu-button:active {
+    background-color: #eee9e3;
+    border-color: #88765c;
+}
+
+@media screen and (min-width: 1440px) {
+    .header-container {
+        padding: 0 80px;
+    }
+
+    .logo {
+        margin-right: 32px;
+    }
+
+    .nav {
+        display: block;
+    }
+
+    .nav-list {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+    }
+
+    .nav-item {
+        display: flex;
+    }
+
+    .nav a {
+        display: inline-block;
+        color: #02060a;
+        border-bottom: 1px solid transparent;
+        transition: border-color 250ms ease;
+    }
+
+    .nav a:hover,
+    .nav a:focus {
+        border-bottom-color: #443b2e;
+    }
+
+    .nav a:active {
+        border-bottom-color: #88765c;
+    }
+
+    .header-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 97px;
+        height: 48px;
+        padding: 12px 24px;
+        margin-left: auto;
+        border: 1px solid #88765c;
+        border-radius: 8px;
+        background-color: #88765c;
+        color: #fff;
+        transition: background-color 250ms ease, border-color 250ms ease;
+    }
+
+    .header-button:hover,
+    .header-button:focus {
+        background-color: #c3b49d;
+        border-color: #02060a;
+    }
+
+    .header-button:active {
+        background-color: #eee9e3;
+        border-color: #88765c;
+    }
+
+    .burger,
+    .mobile-menu {
+        display: none;
+    }
 }
