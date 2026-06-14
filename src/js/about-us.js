@@ -17,8 +17,9 @@ const swiper = new Swiper('.about-swiper', {
 
   pagination: {
     el: '.swiper-pagination',
-    clickable: true,
+    // clickable: true,
+    dynamicBullets: true,
+    // dynamicMainBullets: 1,
   },
 });
 
-console.log(swiper);
