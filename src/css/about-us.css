@@ -4,6 +4,7 @@
 
 .about-us-container {
   position: relative;
+  max-width: none;
 }
 
 .about-us-title {
@@ -46,9 +47,8 @@
 }
 
 .swiper-pagination-bullet-active {
-  opacity: 1 ;
+  opacity: 1;
 }
-
 
 .about-btn.swiper-button-disabled {
   opacity: 0.3;
@@ -174,16 +174,15 @@
   }
 
   .swiper-pagination {
-    width: fit-content ;
-    
-    margin: 24px auto 0 ;
+    width: fit-content;
 
-    position: static ;
+    margin: 24px auto 0;
+
+    position: static;
     display: flex;
     justify-content: center;
   }
 }
-
 
 @media (min-width: 1440px) {
   .about-us {
