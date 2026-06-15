@@ -166,8 +166,8 @@
   }
 
   .swiper {
-    overflow: visible;
     position: static;
+    overflow: hidden;
   }
 
   .swiper-pagination {
