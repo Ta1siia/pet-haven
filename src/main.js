@@ -1,6 +1,5 @@
-import './js/faq.js';
+﻿import './js/faq.js';
 import './js/header.js';
-// Сюди пишемо імпорти
-
+import './js/footer.js';
 import './js/about-us.js';
-
+// Сюди пишемо імпорти
