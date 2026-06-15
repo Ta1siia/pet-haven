@@ -1,25 +1,18 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-const backdrop = document.querySelector('.backdrop');
-const modal =
-  document.querySelector('.order-modal .modal') ||
-  document.querySelector('.modal');
+const backdrop = document.querySelector('.order-modal-backdrop');
+const modal = document.querySelector('.order-modal');
 const closeBtn = document.querySelector('.close-btn');
-const form = document.querySelector('.modal form');
-const openBtn = document.querySelector('.open-btn');
+const form = document.querySelector('.order-modal form');
 
 let currentPetId = null;
 
-openBtn.addEventListener('click', openModal);
-
-function openModal(petId) {
+export function openOrderModal(petId) {
   currentPetId = petId;
   backdrop.classList.add('is-open');
   document.body.style.overflow = 'hidden';
 }
-
-// функція відкриття модалки та отримання id з модалки де треба вибирати тваринок
 
 function closeModal() {
   backdrop.classList.remove('is-open');
@@ -67,7 +60,7 @@ function validateForm(data) {
     isValid = false;
   }
 
-  if (!/^\+?\d{9,15}$/.test(data.phone)) {
+  if (!/^[0-9]{12}$/.test(data.phone.trim())) {
     showError(telInput, 'Введіть коректний номер телефону');
     isValid = false;
   }
@@ -82,14 +75,14 @@ form.addEventListener('submit', async e => {
   const data = {
     name: formData.get('name'),
     phone: formData.get('tel'),
-    animalId: currentPetId,
-    comment: formData.get('comment'),
+    animalId: String(currentPetId),
+    comment: formData.get('comment') || 'Без коментаря',
   };
 
   if (!validateForm(data)) return;
 
   try {
-    await axios.post('https://paw-hut.b.goit.study/api-docs/orders', data);
+    await axios.post('https://paw-hut.b.goit.study/api/orders', data);
 
     Swal.fire({
       icon: 'success',
