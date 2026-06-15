@@ -38,16 +38,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 35px;
 }
 
 .swiper-pagination-bullet {
   background: #02060a !important;
-  opacity: 0.2 !important;
+  opacity: 0.2;
 }
 
 .swiper-pagination-bullet-active {
-  opacity: 1 !important;
+  opacity: 1 ;
 }
 
 
@@ -175,18 +174,20 @@
   }
 
   .swiper-pagination {
-    margin-top: 24px;
-    position: static !important;
+    width: fit-content ;
+    
+    margin: 24px auto 0 ;
+
+    position: static ;
     display: flex;
     justify-content: center;
-
   }
 }
 
 
 @media (min-width: 1440px) {
   .about-us {
-    padding: 80px 64px;
+    padding: 80px 0;
   }
 
   .slide-text {
