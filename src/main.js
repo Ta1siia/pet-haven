@@ -1,4 +1,4 @@
 // Сюди пишемо імпорти
 
-import './js/about-us.js'
+import './js/about-us.js';
 
