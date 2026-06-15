@@ -1,12 +1,9 @@
 .about-us {
   padding: 64px 0;
 }
-
 .about-us-container {
   position: relative;
-  max-width: none;
 }
-
 .about-us-title {
   text-align: center;
   padding-bottom: 40px;
