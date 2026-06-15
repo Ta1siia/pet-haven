@@ -1,3 +1,6 @@
+import axios from 'axios';
+import iziToast from 'izitoast';
+
 const BASE_URL = 'https://paw-hut.b.goit.study/api';
 
 const backdrop = document.querySelector('#animal-modal');
@@ -18,25 +21,24 @@ let currentAnimal = null;
 /* 
    Отримання даних тварини
 */
-
 async function getAnimalById(id) {
   try {
-    const response = await fetch(`${BASE_URL}/animals/${id}`);
-
-    if (!response.ok) {
-      throw new Error('Помилка отримання даних');
-    }
-
-    return await response.json();
+    const { data } = await axios.get(`${BASE_URL}/animals/${id}`);
+    return data;
   } catch (error) {
-    console.error(error);
+    iziToast.error({
+      title: 'Помилка',
+      message: 'Не вдалося отримати дані тварини',
+      position: 'topRight',
+    });
+
+    return null;
   }
 }
 
 /* 
    Заповнення модалки
- */
-
+*/
 function renderAnimalModal(animal) {
   animalImg.src = animal.imgURL || '';
   animalImg.alt = animal.name || 'Animal photo';
@@ -47,8 +49,7 @@ function renderAnimalModal(animal) {
   animalMeta.textContent =
     `${animal.age || 'Невідомий вік'} • ${animal.sex || 'Невідома стать'}`;
 
-  animalDescription.textContent =
-    animal.comment || 'Опис відсутній';
+  animalDescription.textContent = animal.comment || 'Опис відсутній';
 
   animalHealth.innerHTML = `
     <strong>Здоров'я:</strong>
@@ -63,8 +64,7 @@ function renderAnimalModal(animal) {
 
 /* 
    Відкрити модалку
- */
-
+*/
 async function openAnimalModal(id) {
   const animal = await getAnimalById(id);
 
@@ -75,7 +75,6 @@ async function openAnimalModal(id) {
   renderAnimalModal(animal);
 
   backdrop.classList.remove('is-hidden');
-
   document.body.style.overflow = 'hidden';
 
   document.addEventListener('keydown', handleEsc);
@@ -83,20 +82,16 @@ async function openAnimalModal(id) {
 
 /* 
    Закрити модалку
- */
-
+*/
 function closeAnimalModal() {
   backdrop.classList.add('is-hidden');
-
   document.body.style.overflow = '';
-
   document.removeEventListener('keydown', handleEsc);
 }
 
 /* 
    Escape
 */
-
 function handleEsc(event) {
   if (event.key === 'Escape') {
     closeAnimalModal();
@@ -105,14 +100,12 @@ function handleEsc(event) {
 
 /* 
    Закриття кнопкою X
- */
-
+*/
 closeBtn.addEventListener('click', closeAnimalModal);
 
 /* 
    Закриття по backdrop
 */
-
 backdrop.addEventListener('click', event => {
   if (event.target === backdrop) {
     closeAnimalModal();
@@ -122,27 +115,20 @@ backdrop.addEventListener('click', event => {
 /* 
    Кнопка Взяти додому
 */
-
 adoptBtn.addEventListener('click', () => {
   closeAnimalModal();
 
-  // тут відкривається друга модалка
-  // openApplicationModal(currentAnimal);
-
-  console.log('Відкрити форму заявки', currentAnimal);
+  // openApplicationModal(currentAnimal); // майбутня модалка заявки
 });
 
 /* 
    Відкриття з картки
 */
-
 document.addEventListener('click', event => {
   const card = event.target.closest('.animal-card');
-
   if (!card) return;
 
   const animalId = card.dataset.id;
-
   if (!animalId) return;
 
   openAnimalModal(animalId);
