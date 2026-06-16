@@ -1,5 +1,6 @@
 import axios from 'axios';
 import iziToast from 'izitoast';
+import { openOrderModal } from './order-modal.js';
 
 const BASE_URL = 'https://paw-hut.b.goit.study/api';
 
@@ -118,7 +119,7 @@ backdrop.addEventListener('click', event => {
 adoptBtn.addEventListener('click', () => {
   closeAnimalModal();
 
-  // openApplicationModal(currentAnimal); // майбутня модалка заявки
+  openOrderModal(currentAnimal._id);
 });
 
 /* 
