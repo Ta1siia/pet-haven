@@ -1,4 +1,7 @@
 import axios from 'axios';
+import { openAnimalModal } from './animal-details-modal';
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 
 axios.defaults.baseURL = 'https://paw-hut.b.goit.study';
 
@@ -45,7 +48,7 @@ function isEndOfList() {
   return page * limit >= totalItems;
 }
 
-import { openAnimalModal } from './animal-details-modal';
+
 petsList.addEventListener('click', e => {
   const btn = e.target.closest('.more-btn');
 

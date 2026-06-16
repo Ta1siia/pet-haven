@@ -192,11 +192,12 @@ border: 1px solid #88765c;
 .pet-card {
         width: calc((100% - 32px) / 2);
     }
-}
+
 .load-more-btn {
 display: block;
     max-width: 335px;
     margin: 0 auto;
+}
 }
 /*Desktop*/
 
