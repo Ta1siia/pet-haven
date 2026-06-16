@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { openAnimalModal } from './animal-details-modal';
+import { openAnimalModal } from './animal-details-modal.js';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
@@ -8,7 +8,6 @@ axios.defaults.baseURL = 'https://paw-hut.b.goit.study';
 const petsList = document.querySelector('#pets-list');
 const categoriesList = document.querySelector('.categories-list');
 const loadMoreBtn = document.querySelector('#load-more-btn');
-
 
 let page = 1;
 let limit = getLimit();
@@ -49,7 +48,6 @@ function getLimit() {
 function isEndOfList() {
   return page * limit >= totalItems;
 }
-
 
 petsList.addEventListener('click', e => {
   const btn = e.target.closest('.more-btn');
@@ -123,11 +121,7 @@ async function loadPets(reset = false) {
 
     limit = getLimit();
 
-    const data = await getAnimals(
-      page,
-      limit,
-      currentCategory
-    );
+    const data = await getAnimals(page, limit, currentCategory);
 
     totalItems = data.totalItems;
 
@@ -145,7 +139,6 @@ async function loadPets(reset = false) {
   }
 }
 
-
 function toggleLoadMoreBtn() {
   if (isEndOfList()) {
     loadMoreBtn.classList.add('hidden');
@@ -153,7 +146,6 @@ function toggleLoadMoreBtn() {
     loadMoreBtn.classList.remove('hidden');
   }
 }
-
 
 async function init() {
   try {
@@ -181,23 +173,16 @@ categoriesList.addEventListener('click', async e => {
 
   document
     .querySelectorAll('.category-btn')
-    .forEach(btn =>
-      btn.classList.remove('active')
-    );
+    .forEach(btn => btn.classList.remove('active'));
 
   btn.classList.add('active');
 
   page = 1;
 
-  currentCategory =
-    btn.dataset.categoryId || null;
+  currentCategory = btn.dataset.categoryId || null;
 
   await loadPets(true);
 });
-
-
-
-
 
 loadMoreBtn.addEventListener('click', async () => {
   page += 1;
@@ -211,16 +196,14 @@ loadMoreBtn.addEventListener('click', async () => {
   toggleLoadMoreBtn();
 });
 
-
 let resizeTimer;
 window.addEventListener('resize', () => {
-clearTimeout(resizeTimer);
-resizeTimer = setTimeout(() => {
-page = 1;
-loadPets(false);
-}, 300);
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    page = 1;
+    loadPets(false);
+  }, 300);
 });
-
 
 function renderCategories(categories) {
   const markup = `
