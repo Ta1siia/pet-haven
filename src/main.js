@@ -1,4 +1,9 @@
-import './js/faq.js';
+﻿import './js/faq.js';
 import './js/header.js';
-// Сюди пишемо імпорти
+import './js/order-modal.js';
+import './js/footer.js';
+import './js/about-us.js';
 import './js/animal-modal.js';
+import './js/success-stories.js';
+// Сюди пишемо імпорти
+
