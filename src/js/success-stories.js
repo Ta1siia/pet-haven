@@ -1,3 +1,4 @@
+import iconsUrl from '../img/icons.svg?url';
 import axios from 'axios';
 import iziToast from 'izitoast';
 import Swiper from 'swiper';
@@ -28,9 +29,7 @@ function renderStars(rate) {
         else if (i === full && half) id = 'icon-star-half';
         else id = 'icon-star-outline';
 
-        return `<svg width="20" height="20">
-        <use href="./img/icons.svg#${id}"></use>
-      </svg>`;
+        return `<svg width="20" height="20"><use href="${iconsUrl}#${id}"></use></svg>`;
       })
       .join('')}
   </div>`;
