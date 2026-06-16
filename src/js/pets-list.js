@@ -45,6 +45,14 @@ function isEndOfList() {
   return page * limit >= totalItems;
 }
 
+import { openAnimalModal } from './animal-details-modal';
+petsList.addEventListener('click', e => {
+  const btn = e.target.closest('.more-btn');
+
+  if (!btn) return;
+
+  openAnimalModal(btn.dataset.id);
+});
 
 function renderPets(animals, append = false) {
   const markup = animals
@@ -121,7 +129,11 @@ async function init() {
 
     toggleLoadMoreBtn();
   } catch (error) {
-    console.error(error);
+    iziToast.error({
+      title: 'Помилка',
+      message: 'Не вдалося завантажити дані.',
+      position: 'topRight',
+    });
   }
 }
 init();
@@ -166,10 +178,13 @@ loadMoreBtn.addEventListener('click', async () => {
 });
 
 
+let resizeTimer;
 window.addEventListener('resize', () => {
-  page = 1;
-
-  loadPets(false);
+clearTimeout(resizeTimer);
+resizeTimer = setTimeout(() => {
+page = 1;
+loadPets(false);
+}, 300);
 });
 
 
