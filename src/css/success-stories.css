@@ -53,6 +53,8 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
+  text-align: left;
+  align-items: flex-start;
 }
 
 .success-stories-review-stars {
