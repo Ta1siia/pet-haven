@@ -16,7 +16,6 @@ const swiper = new Swiper('.about-swiper', {
   },
 
   pagination: {
-    el: '.swiper-pagination',
+    el: '.about-us-swiper-pagination',
   },
 });
-

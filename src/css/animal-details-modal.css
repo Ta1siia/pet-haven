@@ -1,0 +1,146 @@
+/* BACKDROP */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 64px 20px;
+  overflow-y: auto;
+}
+
+/* HIDE */
+.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* MODAL */
+.modal {
+  position: relative;
+
+  background: #fff;
+  border-radius: 8px;
+
+  width: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  gap: 24px;
+
+  padding: 64px 20px;
+
+  overflow-y: auto;
+}
+
+/* CLOSE */
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  border: none;
+  background: transparent;
+  transition:
+    background 200ms ease,
+    opacity 200ms ease;
+
+  cursor: pointer;
+}
+
+/* IMAGE */
+.modal-left {
+  width: 100%;
+}
+
+.animal-img {
+  width: 100%;
+  height: 295px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* RIGHT */
+.modal-right {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.animal-name {
+  font-size: 20px;
+}
+
+.btn-adopt {
+  margin-top: 32px;
+
+  background: #88765c;
+  color: #fff;
+
+  transition:
+    transform 150ms ease,
+    opacity 150ms ease;
+
+  padding: 12px 24px;
+  border-radius: 8px;
+
+  border: 1px solid #88765c;
+}
+
+/* HOVER / FOCUS */
+.btn-adopt:hover,
+.btn-adopt:focus-visible {
+  background: #c3b49d;
+  border: 1px solid #02060a;
+  color: #02060a;
+}
+
+@media (min-width: 768px) {
+  .backdrop {
+    padding: 64px 32px;
+  }
+  .modal {
+    flex-direction: row;
+    gap: 24px;
+    padding: 64px 32px;
+  }
+
+  .modal-left,
+  .modal-right {
+    width: 50%;
+  }
+  .btn-adopt {
+    align-self: flex-end;
+  }
+
+  .animal-img {
+    height: 100%;
+    min-height: 450px;
+  }
+}
+@media (min-width: 1440px) {
+  .backdrop {
+    padding: 64px;
+  }
+
+  .modal {
+    padding: 64px;
+    max-width: 1312px;
+  }
+
+  .animal-name {
+    font-size: 40px;
+  }
+
+  .animal-img {
+    min-height: 450px;
+  }
+  .btn-adopt {
+    margin-top: auto;
+  }
+}
