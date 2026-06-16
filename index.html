@@ -13,9 +13,9 @@
       referrerpolicy="no-referrer"
     />
     <script type="module" crossorigin src="/pet-haven/index.js"></script>
-    <link rel="modulepreload" crossorigin href="/pet-haven/assets/vendor-E5qIuxLU.js">
+    <link rel="modulepreload" crossorigin href="/pet-haven/assets/vendor-C_3Whk38.js">
     <link rel="stylesheet" crossorigin href="/pet-haven/assets/vendor-XYtvLfmp.css">
-    <link rel="stylesheet" crossorigin href="/pet-haven/assets/index-Dt6J57uD.css">
+    <link rel="stylesheet" crossorigin href="/pet-haven/assets/index-CVURklc8.css">
   </head>
   <body>
     <header class="header">
@@ -498,7 +498,58 @@
 </footer>
 
     
-    
+    <div class="order-modal-backdrop">
+  <div class="order-modal">
+    <div class="close-btn-container">
+      <button type="button" class="close-btn">
+        <svg class="close-icon" width="24" height="24">
+          <use href="/pet-haven/assets/icons-CgUhUynE.svg#icon-close"></use>
+        </svg>
+      </button>
+    </div>
+
+    <h2 class="modal-title">Залишіть заявку на знайомство</h2>
+
+    <form>
+      <label for="name">
+        <span class="label-text">Ім&apos;я&#42;</span>
+
+        <input
+          class="input"
+          type="text"
+          name="name"
+          id="name"
+          placeholder="Андрій"
+        />
+      </label>
+      <label for="tel">
+        <span class="label-text">Телефон&#42;</span>
+        <input
+          class="input"
+          type="tel"
+          name="tel"
+          id="tel"
+          placeholder="380955559922"
+        />
+      </label>
+      <label for="comment">
+        <span class="label-text">Коментар</span>
+        <textarea
+          class="textarea"
+          name="comment"
+          id="comment"
+          placeholder="Напишіть ваш коментар"
+        ></textarea>
+      </label>
+
+      <div class="submit-btn-container">
+        <button type="submit" class="submit-btn">Надіслати</button>
+      </div>
+    </form>
+    <div class="loader"></div>
+  </div>
+</div>
+
 
   </body>
 </html>
