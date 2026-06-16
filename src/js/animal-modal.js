@@ -21,7 +21,7 @@ let currentAnimal = null;
 /* 
    Отримання даних тварини
 */
- async function openAnimalModal(id)  {
+ async function getAnimalById(id)  {
   try {
     const { data } = await axios.get(`${BASE_URL}/animals/${id}`);
     return data;
