@@ -3,5 +3,7 @@ import './js/header.js';
 import './js/order-modal.js';
 import './js/footer.js';
 import './js/about-us.js';
-// Сюди пишемо імпорти
+import './js/animal-modal.js';
 import './js/success-stories.js';
+// Сюди пишемо імпорти
+
