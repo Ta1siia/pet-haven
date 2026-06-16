@@ -15,7 +15,7 @@
     <script type="module" crossorigin src="/pet-haven/index.js"></script>
     <link rel="modulepreload" crossorigin href="/pet-haven/assets/vendor-Ddz1Ogag.js">
     <link rel="stylesheet" crossorigin href="/pet-haven/assets/vendor-XYtvLfmp.css">
-    <link rel="stylesheet" crossorigin href="/pet-haven/assets/index-CjVjvaqH.css">
+    <link rel="stylesheet" crossorigin href="/pet-haven/assets/index-BhCvhzIH.css">
   </head>
   <body>
     <header class="header">
@@ -571,7 +571,37 @@
   </div>
 </footer>
 
-    
+    <div class="backdrop is-hidden" id="animal-modal" role="dialog" aria-modal="true">
+    <div class="modal">
+        <button class="modal-close" type="button" aria-label="Закрити модальне вікно">
+            <svg width="24" height="24">
+                <use href="/pet-haven/assets/icons-CgUhUynE.svg#icon-close"></use>
+            </svg>
+        </button>
+
+        <div class="modal-left">
+            <img class="animal-img" src="" alt="Фото тварини" />
+        </div>
+
+        <div class="modal-right">
+            <span class="animal-type"></span>
+
+            <h2 class="animal-name"></h2>
+
+            <p class="animal-meta"></p>
+
+            <p class="animal-description"></p>
+
+            <div class="animal-health"></div>
+
+            <div class="animal-behavior"></div>
+
+            <button class="btn-adopt" type="button">
+                Взяти додому
+            </button>
+        </div>
+    </div>
+</div>
     <div class="order-modal-backdrop">
   <div class="order-modal">
     <div class="close-btn-container">
