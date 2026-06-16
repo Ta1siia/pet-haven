@@ -45,11 +45,11 @@ function renderFeedbacks(feedbacks) {
   const markup = feedbacks
     .map(({ author, rate, description }) => {
       return `
-  <li class="swiper-slide review-card">
-    ${renderStars(rate)}
-    <p class="review-text">${description}</p>
-    <p class="review-author">${author}</p>
-</li>`;
+        <li class="swiper-slide success-stories-review-card">
+          ${renderStars(rate)}
+          <p class="success-stories-review-text">${description}</p>
+          <p class="success-stories-review-author">${author}</p>
+        </li>`;
     })
     .join('');
   storiesList.innerHTML = markup;
