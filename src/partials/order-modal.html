@@ -3,7 +3,7 @@
     <div class="close-btn-container">
       <button type="button" class="close-btn">
         <svg class="close-icon" width="24" height="24">
-          <use href="../img/icons.svg#icon-close"></use>
+          <use href="./img/icons.svg#icon-close"></use>
         </svg>
       </button>
     </div>
@@ -11,8 +11,9 @@
     <h2 class="modal-title">Залишіть заявку на знайомство</h2>
 
     <form>
-      <label class="label" for="name">
-        <p class="label-text">Ім&apos;я&#42;</p>
+      <label for="name">
+        <span class="label-text">Ім&apos;я&#42;</span>
+
         <input
           class="input"
           type="text"
@@ -21,8 +22,8 @@
           placeholder="Андрій"
         />
       </label>
-      <label class="label" for="tel">
-        <p class="label-text">Телефон&#42;</p>
+      <label for="tel">
+        <span class="label-text">Телефон&#42;</span>
         <input
           class="input"
           type="tel"
@@ -31,8 +32,8 @@
           placeholder="380955559922"
         />
       </label>
-      <label class="label" for="comment">
-        <p class="label-text">Коментар</p>
+      <label for="comment">
+        <span class="label-text">Коментар</span>
         <textarea
           class="textarea"
           name="comment"
@@ -44,7 +45,7 @@
       <div class="submit-btn-container">
         <button type="submit" class="submit-btn">Надіслати</button>
       </div>
-      <div class="loader"></div>
     </form>
+    <div class="loader"></div>
   </div>
 </div>
