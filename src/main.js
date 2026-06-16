@@ -4,3 +4,4 @@ import './js/order-modal.js';
 import './js/footer.js';
 import './js/about-us.js';
 // Сюди пишемо імпорти
+import './js/success-stories.js';
