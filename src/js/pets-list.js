@@ -62,25 +62,37 @@ function renderPets(animals, append = false) {
         image,
         species,
         name,
+        categories,
         age,
         gender,
         shortDescription,
       }) => `
-      <li class="pet-card" data-id="${_id}">
-        <img src="${image}" alt="${name}" class="pet-img"/>
+     <li class="pet-card" data-id="${_id}">
+  <img src="${image}" alt="${name}" class="pet-img"/>
 
-        <h3 class="pet-name">${name}</h3>
+  <div class="pet-content">
+    <p class="pet-species">${species}</p>
 
-        <p class="pet-species">${species}</p>
-        <p class="pet-age">${age}</p>
-        <p class="pet-gender">${gender}</p>
+    <h3 class="pet-name">${name}</h3>
 
-        <p class="pet-desc">${shortDescription ?? ''}</p>
+    <ul class="category-tag-list">
+      ${categories
+        .map(category => `<li class="category-tag">${category.name}</li>`)
+        .join('')}
+    </ul>
 
-        <button class="more-btn" data-id="${_id}">
-          Дізнатись більше
-        </button>
-      </li>
+    <ul class="age-gender">
+      <li class="pet-age">${age}</li>
+      <li class="pet-gender">${gender}</li>
+    </ul>
+
+    <p class="pet-desc">${shortDescription ?? ''}</p>
+  </div>
+
+  <button class="more-btn" data-id="${_id}">
+    Дізнатись більше
+  </button>
+</li>
     `
     )
     .join('');
