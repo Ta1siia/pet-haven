@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { openAnimalModal } from './animal-details-modal.js';
+import { openAnimalModal } from './animal-modal.js';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
