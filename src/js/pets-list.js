@@ -15,6 +15,8 @@ let limit = getLimit();
 let totalItems = 0;
 let currentCategory = null;
 
+const loader = document.querySelector('#loader');
+
 /* 
    API
  */
@@ -107,17 +109,40 @@ function renderPets(animals, append = false) {
   }
 }
 
+function showLoader() {
+  loader.classList.remove('hidden');
+}
+
+function hideLoader() {
+  loader.classList.add('hidden');
+}
 
 async function loadPets(reset = false) {
-  limit = getLimit();
+  try {
+    showLoader();
 
-  const data = await getAnimals(page, limit, currentCategory);
+    limit = getLimit();
 
-  totalItems = data.totalItems;
+    const data = await getAnimals(
+      page,
+      limit,
+      currentCategory
+    );
 
-  renderPets(data.animals, !reset);
+    totalItems = data.totalItems;
 
-  toggleLoadMoreBtn();
+    renderPets(data.animals, !reset);
+
+    toggleLoadMoreBtn();
+  } catch (error) {
+    iziToast.error({
+      title: 'Помилка',
+      message: 'Не вдалося завантажити дані.',
+      position: 'topRight',
+    });
+  } finally {
+    hideLoader();
+  }
 }
 
 
@@ -136,13 +161,7 @@ async function init() {
 
     renderCategories(categories);
 
-    const data = await getAnimals(page, limit);
-
-    totalItems = data.totalItems;
-
-    renderPets(data.animals);
-
-    toggleLoadMoreBtn();
+    await loadPets(true);
   } catch (error) {
     iziToast.error({
       title: 'Помилка',
