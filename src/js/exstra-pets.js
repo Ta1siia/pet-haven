@@ -3,20 +3,18 @@ const DESKTOP_WIDTH = 1440;
 const MOBILE_TABLET_LIMIT = 8;
 const DESKTOP_LIMIT = 9;
 
-let currentCategory = 'all';
-let currentPage = 1;
-let perPage = getItemsPerPage();
-let totalPages = 1;
 
-function getItemsPerPage() {
+export function getItemsPerPage() {
   return window.innerWidth >= DESKTOP_WIDTH
     ? DESKTOP_LIMIT
     : MOBILE_TABLET_LIMIT;
 }
 
+export let perPage = getItemsPerPage();
+export let totalPages = 1;
 
 
-function updateActiveCategory(activeButton) {
+export function updateActiveCategory(activeButton) {
   const buttons = document.querySelectorAll('.category-btn');
 
   buttons.forEach(button => button.classList.remove('is-active'));
@@ -25,16 +23,5 @@ function updateActiveCategory(activeButton) {
 
 
 
-async function initPetsSection() {
-  const categories = await fetchCategories();
 
-  categoriesList.innerHTML = createCategoriesMarkup(categories);
-
-  categoriesList.addEventListener('click', onCategoryClick);
-  loadMoreBtn.addEventListener('click', onLoadMoreClick);
-
-  await renderAnimals(currentCategory, currentPage);
-}
-
-initPetsSection();
 
