@@ -51,12 +51,15 @@ function renderFeedbacks(feedbacks) {
 
 async function getFeedbacks() {
   const loader = document.createElement('div');
-  loader.classList.add('loader');
+  loader.classList.add('loader', 'is-visible');
+
   try {
     storiesList.after(loader);
+
     const feedbacks = await fetchFeedbacks();
     renderFeedbacks(feedbacks);
-    const swiper = new Swiper('.success-stories-swiper', {
+
+    new Swiper('.success-stories-swiper', {
       modules: [Navigation, Pagination],
       slidesPerView: 1,
       spaceBetween: 32,
@@ -80,13 +83,13 @@ async function getFeedbacks() {
         },
       },
     });
-    loader.remove();
   } catch {
-    loader.remove();
     iziToast.error({
       title: 'Помилка',
       message: 'Не вийшло завантажити відгуки',
     });
+  } finally {
+    loader.remove();
   }
 }
 

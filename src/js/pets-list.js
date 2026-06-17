@@ -13,8 +13,9 @@ let page = 1;
 let limit = getLimit();
 let totalItems = 0;
 let currentCategory = null;
+let loadedAnimals = [];
 
-const loader = document.querySelector('#loader');
+const loader = document.querySelector('#pets-loader');
 
 /* 
    API
@@ -54,7 +55,11 @@ petsList.addEventListener('click', e => {
 
   if (!btn) return;
 
-  openAnimalModal(btn.dataset.id);
+  const animal = loadedAnimals.find(animal => animal._id === btn.dataset.id);
+
+  if (!animal) return;
+
+  openAnimalModal(animal);
 });
 
 function renderPets(animals, append = false) {
@@ -108,11 +113,11 @@ function renderPets(animals, append = false) {
 }
 
 function showLoader() {
-  loader.classList.remove('hidden');
+  loader.classList.add('is-visible');
 }
 
 function hideLoader() {
-  loader.classList.add('hidden');
+  loader.classList.remove('is-visible');
 }
 
 async function loadPets(reset = false) {
@@ -124,6 +129,12 @@ async function loadPets(reset = false) {
     const data = await getAnimals(page, limit, currentCategory);
 
     totalItems = data.totalItems;
+
+    if (reset) {
+      loadedAnimals = data.animals;
+    } else {
+      loadedAnimals.push(...data.animals);
+    }
 
     renderPets(data.animals, !reset);
 
@@ -153,6 +164,9 @@ async function init() {
 
     renderCategories(categories);
 
+    page = 1;
+    currentCategory = null;
+
     await loadPets(true);
   } catch (error) {
     iziToast.error({
@@ -162,6 +176,7 @@ async function init() {
     });
   }
 }
+
 init();
 /* 
    фільтрація
@@ -191,18 +206,11 @@ loadMoreBtn.addEventListener('click', async () => {
 
   totalItems = data.totalItems;
 
+  loadedAnimals.push(...data.animals);
+
   renderPets(data.animals, true);
 
   toggleLoadMoreBtn();
-});
-
-let resizeTimer;
-window.addEventListener('resize', () => {
-  clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(() => {
-    page = 1;
-    loadPets(false);
-  }, 300);
 });
 
 function renderCategories(categories) {
@@ -211,6 +219,7 @@ function renderCategories(categories) {
       <button
         class="category-btn active"
         data-category-id=""
+        type="button"
       >
         Всі
       </button>
@@ -223,6 +232,7 @@ function renderCategories(categories) {
             <button
               class="category-btn"
               data-category-id="${category._id}"
+              type="button"
             >
               ${category.name}
             </button>

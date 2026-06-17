@@ -1,31 +1,50 @@
-<div class="backdrop is-hidden" id="animal-modal" role="dialog" aria-modal="true">
-    <div class="modal">
-        <button class="modal-close" type="button" aria-label="Закрити модальне вікно">
-            <svg width="24" height="24">
-                <use href="./img/icons.svg#icon-close"></use>
-            </svg>
-        </button>
+<div
+  class="backdrop is-hidden"
+  id="animal-modal"
+  role="dialog"
+  aria-modal="true"
+>
+  <div class="modal">
+    <button
+      class="modal-close"
+      type="button"
+      aria-label="Закрити модальне вікно"
+    >
+      <svg width="24" height="24">
+        <use href="./img/icons.svg#icon-close"></use>
+      </svg>
+    </button>
 
-        <div class="modal-left">
-            <img class="animal-img" src="" alt="Фото тварини" />
-        </div>
-
-        <div class="modal-right">
-            <span class="animal-type"></span>
-
-            <h2 class="animal-name"></h2>
-
-            <p class="animal-meta"></p>
-
-            <p class="animal-description"></p>
-
-            <div class="animal-health"></div>
-
-            <div class="animal-behavior"></div>
-
-            <button class="btn-adopt" type="button">
-                Взяти додому
-            </button>
-        </div>
+    <div class="modal-left">
+      <img class="animal-img" src="" alt="Фото тварини" />
     </div>
+
+    <div class="modal-right">
+      <p class="animal-type"></p>
+
+      <h2 class="animal-name"></h2>
+
+      <ul class="animal-meta">
+        <li class="animal-age"></li>
+        <li class="animal-gender"></li>
+      </ul>
+
+      <div class="animal-section">
+        <h3 class="animal-section-title">Опис:</h3>
+        <p class="animal-description"></p>
+      </div>
+
+      <div class="animal-section">
+        <h3 class="animal-section-title">Здоров'я:</h3>
+        <p class="animal-health"></p>
+      </div>
+
+      <div class="animal-section">
+        <h3 class="animal-section-title">Поведінка:</h3>
+        <p class="animal-behavior"></p>
+      </div>
+
+      <button class="btn-adopt" type="button">Взяти додому</button>
+    </div>
+  </div>
 </div>

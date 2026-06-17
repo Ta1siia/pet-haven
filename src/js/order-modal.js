@@ -6,10 +6,11 @@ const modal = document.querySelector('.order-modal');
 const closeBtn = document.querySelector('.close-btn');
 const form = document.querySelector('.order-modal form');
 
-let currentPetId = null;
+let currentAnimalId = null;
 
-export function openOrderModal(petId) {
-  currentPetId = petId;
+export function openOrderModal(animal) {
+  currentAnimalId = typeof animal === 'object' ? animal._id : animal;
+
   backdrop.classList.add('is-open');
   document.body.style.overflow = 'hidden';
 }
@@ -73,10 +74,10 @@ form.addEventListener('submit', async e => {
 
   const formData = new FormData(form);
   const data = {
-    name: formData.get('name'),
-    phone: formData.get('tel'),
-    animalId: String(currentPetId),
-    comment: formData.get('comment') || 'Без коментаря',
+    name: formData.get('name').trim(),
+    phone: formData.get('tel').trim(),
+    animalId: String(currentAnimalId),
+    comment: formData.get('comment')?.trim() || 'Без коментаря',
   };
 
   if (!validateForm(data)) return;

@@ -1,8 +1,4 @@
-import axios from 'axios';
-import iziToast from 'izitoast';
 import { openOrderModal } from './order-modal.js';
-
-const BASE_URL = 'https://paw-hut.b.goit.study/api';
 
 const backdrop = document.querySelector('#animal-modal');
 const modal = document.querySelector('.modal');
@@ -12,65 +8,36 @@ const adoptBtn = document.querySelector('.btn-adopt');
 const animalImg = document.querySelector('.animal-img');
 const animalType = document.querySelector('.animal-type');
 const animalName = document.querySelector('.animal-name');
-const animalMeta = document.querySelector('.animal-meta');
+const animalAge = document.querySelector('.animal-age');
+const animalGender = document.querySelector('.animal-gender');
 const animalDescription = document.querySelector('.animal-description');
 const animalHealth = document.querySelector('.animal-health');
 const animalBehavior = document.querySelector('.animal-behavior');
 
 let currentAnimal = null;
 
-/* 
-   Отримання даних тварини
-*/
- async function getAnimalById(id)  {
-  try {
-    const { data } = await axios.get(`${BASE_URL}/animals/${id}`);
-    return data;
-  } catch (error) {
-    iziToast.error({
-      title: 'Помилка',
-      message: 'Не вдалося отримати дані тварини',
-      position: 'topRight',
-    });
-
-    return null;
-  }
-}
-
-/* 
-   Заповнення модалки
-*/
 function renderAnimalModal(animal) {
-  animalImg.src = animal.imgURL || '';
-  animalImg.alt = animal.name || 'Animal photo';
+  animalImg.src = animal.image || '';
+  animalImg.alt = animal.name || 'Фото тварини';
 
   animalType.textContent = animal.species || '';
   animalName.textContent = animal.name || '';
 
-  animalMeta.textContent =
-    `${animal.age || 'Невідомий вік'} • ${animal.sex || 'Невідома стать'}`;
+  animalAge.textContent = animal.age || 'Невідомий вік';
+  animalGender.textContent = animal.gender || 'Невідома стать';
 
-  animalDescription.textContent = animal.comment || 'Опис відсутній';
+  animalDescription.textContent =
+    animal.description || animal.shortDescription || 'Опис відсутній';
 
-  animalHealth.innerHTML = `
-    <strong>Здоров'я:</strong>
-    ${animal.health || 'Інформація відсутня'}
-  `;
+  animalHealth.textContent = animal.healthStatus || 'Інформація відсутня';
 
-  animalBehavior.innerHTML = `
-    <strong>Поведінка:</strong>
-    ${animal.behavior || 'Інформація відсутня'}
-  `;
+  animalBehavior.textContent = animal.behavior || 'Інформація відсутня';
 }
 
 /* 
    Відкрити модалку
 */
-export async function openAnimalModal(id) {
-  const animal = await getAnimalById(id);
-
-  if (!animal) return;
-
+export function openAnimalModal(animal) {
   currentAnimal = animal;
 
   renderAnimalModal(animal);
@@ -119,18 +86,5 @@ backdrop.addEventListener('click', event => {
 adoptBtn.addEventListener('click', () => {
   closeAnimalModal();
 
-  openOrderModal(currentAnimal._id);
-});
-
-/* 
-   Відкриття з картки
-*/
-document.addEventListener('click', event => {
-  const card = event.target.closest('.animal-card');
-  if (!card) return;
-
-  const animalId = card.dataset.id;
-  if (!animalId) return;
-
-  openAnimalModal(animalId);
+  openOrderModal(currentAnimal);
 });
