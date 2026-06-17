@@ -6,7 +6,6 @@
 
 .faq-container {
   max-width: 864px;
-  padding: 0 20px;
   margin: 0 auto;
 }
 
@@ -143,9 +142,6 @@
 }
 
 @media screen and (min-width: 768px) {
-  .faq-container {
-    padding: 0 32px;
-  }
   .faq {
     padding-top: 80px;
     padding-bottom: 80px;

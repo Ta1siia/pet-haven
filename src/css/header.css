@@ -5,11 +5,7 @@
 .header-container {
   display: flex;
   align-items: center;
-  max-width: 1440px;
   height: 64px;
-  margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 24px;
 }
 
 .logo {
@@ -156,10 +152,6 @@
   border-color: #88765c;
 }
 @media screen and (min-width: 768px) {
-  .header-container {
-    padding-left: 44px;
-    padding-right: 32px;
-  }
   .mobile-nav-list {
     text-align: center;
   }
@@ -169,10 +161,6 @@
   }
 }
 @media screen and (min-width: 1440px) {
-  .header-container {
-    padding: 0 80px;
-  }
-
   .logo {
     margin-right: 32px;
   }
