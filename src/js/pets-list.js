@@ -2,6 +2,11 @@ import axios from 'axios';
 import { openAnimalModal } from './animal-modal.js';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
+import {
+  getItemsPerPage,
+  isEndOfList,
+  updateActiveCategory,
+} from './extra-pets.js';
 
 axios.defaults.baseURL = 'https://paw-hut.b.goit.study';
 
@@ -10,7 +15,7 @@ const categoriesList = document.querySelector('.categories-list');
 const loadMoreBtn = document.querySelector('#load-more-btn');
 
 let page = 1;
-let limit = getLimit();
+let limit = getItemsPerPage();
 let totalItems = 0;
 let currentCategory = null;
 let loadedAnimals = [];
@@ -40,14 +45,6 @@ async function getAnimals(page, limit, categoryId = null) {
 async function getCategories() {
   const { data } = await axios.get('/api/categories');
   return data;
-}
-
-function getLimit() {
-  return window.innerWidth >= 1440 ? 9 : 8;
-}
-
-function isEndOfList() {
-  return page * limit >= totalItems;
 }
 
 petsList.addEventListener('click', e => {
@@ -124,7 +121,7 @@ async function loadPets(reset = false) {
   try {
     showLoader();
 
-    limit = getLimit();
+    limit = getItemsPerPage();
 
     const data = await getAnimals(page, limit, currentCategory);
 
@@ -151,7 +148,7 @@ async function loadPets(reset = false) {
 }
 
 function toggleLoadMoreBtn() {
-  if (isEndOfList()) {
+  if (isEndOfList(page, limit, totalItems)) {
     loadMoreBtn.classList.add('hidden');
   } else {
     loadMoreBtn.classList.remove('hidden');
@@ -186,11 +183,7 @@ categoriesList.addEventListener('click', async e => {
 
   if (!btn) return;
 
-  document
-    .querySelectorAll('.category-btn')
-    .forEach(btn => btn.classList.remove('active'));
-
-  btn.classList.add('active');
+  updateActiveCategory(btn);
 
   page = 1;
 
@@ -201,16 +194,7 @@ categoriesList.addEventListener('click', async e => {
 
 loadMoreBtn.addEventListener('click', async () => {
   page += 1;
-
-  const data = await getAnimals(page, getLimit(), currentCategory);
-
-  totalItems = data.totalItems;
-
-  loadedAnimals.push(...data.animals);
-
-  renderPets(data.animals, true);
-
-  toggleLoadMoreBtn();
+  await loadPets(false);
 });
 
 function renderCategories(categories) {
