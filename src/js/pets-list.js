@@ -14,31 +14,27 @@ const petsList = document.querySelector('#pets-list');
 const categoriesList = document.querySelector('.categories-list');
 const loadMoreBtn = document.querySelector('#load-more-btn');
 
+const pagination = document.querySelector('#pets-pagination');
+const paginationList = document.querySelector('#pets-pagination-list');
+const prevBtn = document.querySelector('#pets-prev-btn');
+const nextBtn = document.querySelector('#pets-next-btn');
+
+const loader = document.querySelector('#pets-loader');
+
 let page = 1;
 let limit = getItemsPerPage();
 let totalItems = 0;
 let currentCategory = null;
 let loadedAnimals = [];
 
-const loader = document.querySelector('#pets-loader');
-
-/* 
-   API
- */
 async function getAnimals(page, limit, categoryId = null) {
-  const params = {
-    page,
-    limit,
-  };
+  const params = { page, limit };
 
   if (categoryId) {
     params.categoryId = categoryId;
   }
 
-  const { data } = await axios.get('/api/animals', {
-    params,
-  });
-
+  const { data } = await axios.get('/api/animals', { params });
   return data;
 }
 
@@ -47,17 +43,21 @@ async function getCategories() {
   return data;
 }
 
-petsList.addEventListener('click', e => {
-  const btn = e.target.closest('.more-btn');
+function usePagination() {
+  return window.innerWidth >= 768;
+}
 
-  if (!btn) return;
+function getTotalPages() {
+  return Math.ceil(totalItems / limit);
+}
 
-  const animal = loadedAnimals.find(animal => animal._id === btn.dataset.id);
+function showLoader() {
+  loader.classList.add('is-visible');
+}
 
-  if (!animal) return;
-
-  openAnimalModal(animal);
-});
+function hideLoader() {
+  loader.classList.remove('is-visible');
+}
 
 function renderPets(animals, append = false) {
   const markup = animals
@@ -71,34 +71,38 @@ function renderPets(animals, append = false) {
         age,
         gender,
         shortDescription,
-      }) => `
-     <li class="pet-card" data-id="${_id}">
-  <img src="${image}" alt="${name}" class="pet-img"/>
+      }) => {
+        const categoryMarkup = categories
+          .map(category => `<li class="category-tag">${category.name}</li>`)
+          .join('');
 
-  <div class="pet-content">
-    <p class="pet-species">${species}</p>
+        return `
+          <li class="pet-card" data-id="${_id}">
+            <img src="${image}" alt="${name}" class="pet-img" />
 
-    <h3 class="pet-name">${name}</h3>
+            <div class="pet-content">
+              <p class="pet-species">${species}</p>
 
-    <ul class="category-tag-list">
-      ${categories
-        .map(category => `<li class="category-tag">${category.name}</li>`)
-        .join('')}
-    </ul>
+              <h3 class="pet-name">${name}</h3>
 
-    <ul class="age-gender">
-      <li class="pet-age">${age}</li>
-      <li class="pet-gender">${gender}</li>
-    </ul>
+              <ul class="category-tag-list">
+                ${categoryMarkup}
+              </ul>
 
-    <p class="pet-desc">${shortDescription ?? ''}</p>
-  </div>
+              <ul class="age-gender">
+                <li class="pet-age">${age}</li>
+                <li class="pet-gender">${gender}</li>
+              </ul>
 
-  <button class="more-btn" data-id="${_id}">
-    Дізнатись більше
-  </button>
-</li>
-    `
+              <p class="pet-desc">${shortDescription ?? ''}</p>
+            </div>
+
+            <button class="more-btn" data-id="${_id}" type="button">
+              Дізнатись більше
+            </button>
+          </li>
+        `;
+      }
     )
     .join('');
 
@@ -109,12 +113,54 @@ function renderPets(animals, append = false) {
   }
 }
 
-function showLoader() {
-  loader.classList.add('is-visible');
+function renderPagination() {
+  const totalPages = getTotalPages();
+
+  if (!usePagination() || totalPages <= 1) {
+    pagination.classList.add('hidden');
+    paginationList.innerHTML = '';
+    return;
+  }
+
+  pagination.classList.remove('hidden');
+
+  paginationList.innerHTML = Array.from({ length: totalPages }, (_, index) => {
+    const pageNumber = index + 1;
+
+    return `
+      <li>
+        <button
+          class="pets-pagination-page ${pageNumber === page ? 'active' : ''}"
+          type="button"
+          data-page="${pageNumber}"
+          aria-label="Сторінка ${pageNumber}"
+        >
+          ${pageNumber}
+        </button>
+      </li>
+    `;
+  }).join('');
+
+  prevBtn.disabled = page === 1;
+  nextBtn.disabled = page === totalPages;
 }
 
-function hideLoader() {
-  loader.classList.remove('is-visible');
+function toggleControls() {
+  const endOfList = isEndOfList(page, limit, totalItems);
+
+  if (usePagination()) {
+    loadMoreBtn.classList.add('hidden');
+    renderPagination();
+    return;
+  }
+
+  pagination.classList.add('hidden');
+
+  if (endOfList) {
+    loadMoreBtn.classList.add('hidden');
+  } else {
+    loadMoreBtn.classList.remove('hidden');
+  }
 }
 
 async function loadPets(reset = false) {
@@ -126,7 +172,6 @@ async function loadPets(reset = false) {
     const data = await getAnimals(page, limit, currentCategory);
 
     totalItems = data.totalItems;
-
     if (reset) {
       loadedAnimals = data.animals;
     } else {
@@ -134,8 +179,7 @@ async function loadPets(reset = false) {
     }
 
     renderPets(data.animals, !reset);
-
-    toggleLoadMoreBtn();
+    toggleControls();
   } catch (error) {
     iziToast.error({
       title: 'Помилка',
@@ -146,56 +190,6 @@ async function loadPets(reset = false) {
     hideLoader();
   }
 }
-
-function toggleLoadMoreBtn() {
-  if (isEndOfList(page, limit, totalItems)) {
-    loadMoreBtn.classList.add('hidden');
-  } else {
-    loadMoreBtn.classList.remove('hidden');
-  }
-}
-
-async function init() {
-  try {
-    const categories = await getCategories();
-
-    renderCategories(categories);
-
-    page = 1;
-    currentCategory = null;
-
-    await loadPets(true);
-  } catch (error) {
-    iziToast.error({
-      title: 'Помилка',
-      message: 'Не вдалося завантажити дані.',
-      position: 'topRight',
-    });
-  }
-}
-
-init();
-/* 
-   фільтрація
- */
-categoriesList.addEventListener('click', async e => {
-  const btn = e.target.closest('.category-btn');
-
-  if (!btn) return;
-
-  updateActiveCategory(btn);
-
-  page = 1;
-
-  currentCategory = btn.dataset.categoryId || null;
-
-  await loadPets(true);
-});
-
-loadMoreBtn.addEventListener('click', async () => {
-  page += 1;
-  await loadPets(false);
-});
 
 function renderCategories(categories) {
   const markup = `
@@ -228,3 +222,83 @@ function renderCategories(categories) {
 
   categoriesList.innerHTML = markup;
 }
+
+petsList.addEventListener('click', event => {
+  const btn = event.target.closest('.more-btn');
+
+  if (!btn) return;
+
+  const animal = loadedAnimals.find(animal => animal._id === btn.dataset.id);
+
+  if (!animal) return;
+
+  openAnimalModal(animal);
+});
+
+categoriesList.addEventListener('click', async event => {
+  const btn = event.target.closest('.category-btn');
+
+  if (!btn) return;
+
+  updateActiveCategory(btn);
+
+  page = 1;
+  currentCategory = btn.dataset.categoryId || null;
+
+  await loadPets(true);
+});
+
+loadMoreBtn.addEventListener('click', async () => {
+  page += 1;
+  await loadPets(false);
+});
+
+prevBtn.addEventListener('click', async () => {
+  if (page === 1) return;
+
+  page -= 1;
+  await loadPets(true);
+});
+
+nextBtn.addEventListener('click', async () => {
+  const totalPages = getTotalPages();
+
+  if (page >= totalPages) return;
+
+  page += 1;
+  await loadPets(true);
+});
+
+paginationList.addEventListener('click', async event => {
+  const btn = event.target.closest('.pets-pagination-page');
+
+  if (!btn) return;
+
+  const selectedPage = Number(btn.dataset.page);
+
+  if (selectedPage === page) return;
+
+  page = selectedPage;
+  await loadPets(true);
+});
+
+async function init() {
+  try {
+    const categories = await getCategories();
+
+    renderCategories(categories);
+
+    page = 1;
+    currentCategory = null;
+
+    await loadPets(true);
+  } catch (error) {
+    iziToast.error({
+      title: 'Помилка',
+      message: 'Не вдалося завантажити дані.',
+      position: 'topRight',
+    });
+  }
+}
+
+init();
