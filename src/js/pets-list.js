@@ -6,7 +6,7 @@ import {
   getItemsPerPage,
   isEndOfList,
   updateActiveCategory,
-} from './extra-pets.js';
+} from './exstra-pets.js';
 
 axios.defaults.baseURL = 'https://paw-hut.b.goit.study';
 
