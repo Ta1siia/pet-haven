@@ -10,6 +10,7 @@
 
   padding: 64px 20px;
   overflow-y: auto;
+  z-index: 999;
 }
 
 /* HIDE */
@@ -55,15 +56,12 @@
 
 /* IMAGE */
 .modal-left {
-  width: 295px;
+  width: 100%;
   height: 295px;
-  overflow: hidden;
   border-radius: 8px;
 }
 
 .animal-img {
-  min-height: 295px;
-  min-width: 295px;
   display: block;
   width: 100%;
   height: 100%;
@@ -188,16 +186,12 @@
     flex: 1;
   }
 
-  .animal-img {
-    min-height: 0;
-  }
   .btn-adopt {
     width: 100%;
   }
 
   .animal-img {
     height: 100%;
-    min-height: 450px;
     min-width: 0px;
   }
 }
@@ -235,9 +229,6 @@
   }
   .animal-behavior {
     font-size: 16px;
-  }
-  .animal-img {
-    min-height: 0;
   }
   .btn-adopt {
     margin-top: 32px;
