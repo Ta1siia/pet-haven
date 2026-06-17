@@ -181,6 +181,127 @@
     inset 0 12px 16px -4px rgba(0, 0, 0, 0.08);
 }
 
+.pets-pagination {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.pets-pagination.hidden {
+  display: none;
+}
+
+.pets-pagination-list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pets-pagination-item {
+  list-style: none;
+}
+
+.pets-pagination-btn {
+  width: 40px;
+  height: 40px;
+
+  border: 1px solid #c3b49d;
+  border-radius: 8px;
+  background: #eee9e3;
+
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #02060a;
+
+  cursor: pointer;
+
+  transition: all 250ms ease;
+}
+.pets-pagination-page {
+  border-radius: 8px;
+  padding: 12px 24px;
+  width: 57px;
+  height: 45px;
+  border: none;
+  background: none;
+}
+.pets-pagination-page.active {
+  border: 1px solid #ababab;
+  cursor: default;
+}
+
+.pets-pagination-btn:hover,
+.pets-pagination-btn:focus {
+  border: 1px solid rgba(2, 6, 10, 0.6);
+  outline: none;
+}
+
+.pets-pagination-btn:active {
+  box-shadow:
+    inset 0 4px 6px -2px rgba(0, 0, 0, 0.03),
+    inset 0 12px 16px -4px rgba(0, 0, 0, 0.08);
+}
+
+.pets-pagination-btn.is-active {
+  background: #88765c;
+  border-color: #88765c;
+  color: #fff;
+}
+
+.pets-pagination-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+
+  border: 1px solid #c3b49d;
+  border-radius: 8px;
+  background: #eee9e3;
+
+  cursor: pointer;
+
+  transition: all 250ms ease;
+}
+
+.pets-pagination-arrow:hover,
+.pets-pagination-arrow:focus {
+  border: 1px solid rgba(2, 6, 10, 0.6);
+  outline: none;
+}
+
+.pets-pagination-arrow:active {
+  box-shadow:
+    inset 0 4px 6px -2px rgba(0, 0, 0, 0.03),
+    inset 0 12px 16px -4px rgba(0, 0, 0, 0.08);
+}
+
+.pets-pagination-arrow:disabled {
+  opacity: 0.4;
+  pointer-events: none;
+  cursor: default;
+}
+
+.pets-pagination-arrow svg {
+  width: 24px;
+  height: 24px;
+
+  fill: none;
+  stroke: currentColor;
+}
+
+#load-more-btn {
+  display: block;
+}
+
 /* Tablet */
 
 @media screen and (min-width: 768px) {
@@ -195,6 +316,12 @@
     display: block;
     max-width: 335px;
     margin: 0 auto;
+  }
+  #load-more-btn {
+    display: none;
+  }
+  .pets-pagination {
+    display: flex;
   }
 }
 /*Desktop*/
