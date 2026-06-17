@@ -8,9 +8,14 @@ export function getItemsPerPage() {
     : MOBILE_TABLET_LIMIT;
 }
 
-export function updateActiveCategory(activeButton) {
-  const buttons = document.querySelectorAll('.category-btn');
+export function isEndOfList(page, limit, totalItems) {
+  return page * limit >= totalItems;
+}
 
-  buttons.forEach(button => button.classList.remove('is-active'));
-  activeButton.classList.add('is-active');
+export function updateActiveCategory(activeButton) {
+  document
+    .querySelectorAll('.category-btn')
+    .forEach(button => button.classList.remove('active'));
+
+  activeButton.classList.add('active');
 }
